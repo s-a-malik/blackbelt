@@ -37,8 +37,8 @@ def security_score():
         return Response(output, status=400)
 
     # add to the server cache
-    contract_to_score[contract_address].append({"security_score": output["score"], "risk_assessment_timestamp": output["risk_assessment_timestamp"], "ipfs": output["ipfs_hash"]})
-    user_to_transactions[user_address].append({"security_score": output["score"], "contract_address": contract_address, "risk_assessment_timestamp": output["risk_assessment_timestamp"], "ipfs": output["ipfs_hash"]})
+    contract_to_score[contract_address].append({"security_score": output["security_score"], "risk_assessment_timestamp": output["risk_assessment_timestamp"], "ipfs": output["ipfs_hash"]})
+    user_to_transactions[user_address].append({"security_score": output["security_score"], "contract_address": contract_address, "risk_assessment_timestamp": output["risk_assessment_timestamp"], "ipfs": output["ipfs_hash"]})
 
     return output
 
@@ -70,9 +70,9 @@ def prev_transactions():
     print(f"retrieving previous transactions for {wallet_address} on {chain}")
 
     # check server cache
-    output = {"transactions": []}
+    output = user_to_transactions[wallet_address]
     
-    return Response(output, status=200)
+    return output
 
 
 if __name__ == '__main__':

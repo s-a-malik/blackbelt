@@ -27,6 +27,7 @@ def compute_security_score(contract_address, chain):
     verified = is_verified(contract_address, chain)
     audited = is_audited(contract_address, chain)
     transactions, users, deployed_date_unix = numberOfTransactionsAndUsersAndAge(contract_address)
+    min_age_of_contract_in_days = (time.time() - deployed_date_unix) / 86400
     score = 0
     # logic
     if not verified:
@@ -34,17 +35,20 @@ def compute_security_score(contract_address, chain):
     if audited:
         score += 100
 
+    risk_level = "low" if score < 50 else "medium" if score < 75 else "high"
+
     contract_info = {
         "verified": verified,
         "audited": audited,
         "number_of_transactions": transactions,
         "number_of_unique_users": users,
-        "deployed_date_unix": deployed_date_unix
+        "min_age_of_contract_in_days": deployed_date_unix
     }
 
     output.update({
         "contract_address": contract_address,
         "security_score": score,
+        "risk_level": risk_level,
         "risk_assessment_timestamp": int(time.time()),
         "num_times_reported": blacklist["contract_address"],
         "contract_info": contract_info,
