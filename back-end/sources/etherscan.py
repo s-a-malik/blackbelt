@@ -3,7 +3,6 @@
 import os
 import json
 import ssl
-from sys import audit
 
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
@@ -14,7 +13,6 @@ from utils.api_requests import get_request
 import urllib
 from urllib.request import urlopen
 
-load_dotenv()   # load .env file
 ETHERSCAN_KEY = os.getenv("ETHERSCAN_KEY")
 # headers = {
 #   'authority': 'etherscan.io',
