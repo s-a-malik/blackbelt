@@ -78,7 +78,7 @@ def is_audited(address, chain="mainnet"):
         else:
             return True
     except:
-        # probably a testnet transaction
+        print(f"contract search not found for {url}")
         return False
 
 if __name__ == "__main__":

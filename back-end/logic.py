@@ -13,9 +13,12 @@ def compute_security_score(contract_address, chain):
 
     verified = is_verified(contract_address, chain)
     audited = is_audited(contract_address, chain)
-
+    score = 0
     # logic
-    score = 100 if verified else 0
+    if not verified:
+        score = 0
+    if audited:
+        score += 100
 
     contract_info = {
         "verified": verified,
