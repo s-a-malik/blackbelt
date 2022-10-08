@@ -1,7 +1,7 @@
 from flask import Flask, request
 from dotenv import load_dotenv
 
-import configurations
+from utils import configurations
 from logic import security_score
 
 load_dotenv()   # load .env file

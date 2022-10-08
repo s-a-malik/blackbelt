@@ -4,7 +4,7 @@ Self-defense against scammers, directly in your metamask.
 
 ## TODO
 
-- [] Deploy server
+- [ ] Deploy server
 
 
 ## Overview
@@ -26,7 +26,8 @@ Usage:
 
 - Create a python virtual environment (recommended)
 - install requirements `pip install -r requirements.txt`
-- run server 
+- add API keys to .env file
+- run server
 TODO deploy on heroku etc.
 
 ### front-end
