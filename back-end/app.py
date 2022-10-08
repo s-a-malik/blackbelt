@@ -19,13 +19,13 @@ def security_score(contract_address):
     Returns:
     - score (int): The security score (0-100)
     - contract_info (dict): 
-        - baselineBiomass5Year (float): The baseline biomass of the project
-        - satelliteDelta1Year (float): The change in biomass of the project over 1 year
-        - projectedDelta1Year (float): The projected change in biomass of the project over 1 year
+        - age (int): age of the contract in days
+        - balance (int): balance of the contract in wei
+        - tx_count (int): number of transactions sent from the contract        
     """
-    carbon_data = get_carbon_density(project_id)
+    score = security_score(contract_address)
 
-    return carbon_data
+    return score
 
 
 if __name__ == '__main__':
