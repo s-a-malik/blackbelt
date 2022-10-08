@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, Response
 from dotenv import load_dotenv
 
 from logic import compute_security_score
@@ -28,11 +28,12 @@ def security_score():
     contract_address = request.args.get('contract_address', type=str)
     chain = request.args.get('chain', default="mainnet", type=str)
     print(f"retrieving security score for {contract_address} on {chain}")
-    score, contract_info = compute_security_score(contract_address, chain)
-    
+    output = compute_security_score(contract_address, chain)
     # submit to ipfs
+    if output["status"] != "ok":
+        return Response(output, status=400)
 
-    return {"score": score, "contract_info": contract_info}
+    return output
 
 
 if __name__ == '__main__':

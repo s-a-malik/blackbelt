@@ -1,11 +1,13 @@
 #Import packages
+import os
 import requests
-from dotenv import load_dotenv
 
-load_dotenv() 
+IPFS_NODE = os.environ.get("IPFS_NODE")
+IPFS_ID = os.environ.get("IPFS_ID")
+IPFS_SECRET = os.environ.get("IPFS_SECRET")
 
 #Stores file on IPFS and returns hash
-def store_on_ipfs(input, ipfs_node, ipfs_id, ipfs_secret):
+def store_on_ipfs(input):
     """
     Stores file on IPFS and returns hash
     @params:
@@ -18,7 +20,7 @@ def store_on_ipfs(input, ipfs_node, ipfs_id, ipfs_secret):
     'file': (f'{input}'),
     }
 
-    resp = requests.post(f'{ipfs_node}:5001/api/v0/add', files=files, auth=(ipfs_id,ipfs_secret))
+    resp = requests.post(f'{IPFS_NODE}:5001/api/v0/add', files=files, auth=(IPFS_ID, IPFS_SECRET))
     resp = resp.json()
     
     return resp['Hash']

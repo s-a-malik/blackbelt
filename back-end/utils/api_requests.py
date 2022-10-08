@@ -28,11 +28,11 @@ def get_request(url, headers, params=None, timeout=5, retry_count=0):
     return response
 
 
-def post_request(url, headers, payload, timeout=10, retry_count=0):
+def post_request(url, headers, data, timeout=10, retry_count=0):
     """Method to catch connection errors
     """
     try:
-        response = requests.request("POST", url, headers=headers, data=payload, timeout=timeout)
+        response = requests.request("POST", url, headers=headers, data=data, timeout=timeout)
     except TimeoutError:
         # if timeout then stop trying
         print("API request timeout, retry with larger timeout")
@@ -43,5 +43,5 @@ def post_request(url, headers, payload, timeout=10, retry_count=0):
             response = None
         else:
             time.sleep(2)
-            response = post_request(url, headers, payload, timeout, retry_count + 1)
+            response = post_request(url, headers, data, timeout, retry_count + 1)
     return response

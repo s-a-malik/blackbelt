@@ -1,19 +1,25 @@
 """Methods for computing security score of contracts
 """
+import time
 
 from sources.etherscan import is_verified, is_audited
 from sources.ipfs import store_on_ipfs
+from sources.coinbase import isSmartContract, numberOfTransactionsAndUsersAndAge
 
 def compute_security_score(contract_address, chain):
     """
-    Returns the security score and the metadata used to compute it for a given contract address
+    Returns the security score and the metadata used to compute it for a given contract address.
+    NOTE: this actually only works for mainnet contracts right now. Need to change the coinbase urls.
     """
-
-    # TODO check if EOA first using Coinbase Node eth_getCode API
-    # then check if empty "0x" or "0x0" c.f. https://github.com/MetaMask/metamask-extension/blob/e3ea4f2cd044d48c61b6a35ef206fa942f3b43d1/shared/modules/contract-utils.js
-
+    output = {"status": "ok"}
+    # check if EOA first
+    if not isSmartContract(contract_address):
+        output["status"] = "error, not a contract address"
+        return output
+    
     verified = is_verified(contract_address, chain)
     audited = is_audited(contract_address, chain)
+    transactions, users, deployed_date_unix = numberOfTransactionsAndUsersAndAge(contract_address)
     score = 0
     # logic
     if not verified:
@@ -23,10 +29,18 @@ def compute_security_score(contract_address, chain):
 
     contract_info = {
         "verified": verified,
-        "audited": audited
+        "audited": audited,
+        "number_of_transactions": transactions,
+        "number_of_unique_users": users,
+        "deployed_date_unix": deployed_date_unix
     }
 
-    return score, contract_info
+    output.update({"contract_address": contract_address, "score": score, "risk_assessment_timestamp": time.time(), "contract_info": contract_info})
 
-    #To-Do send output as string to ipfs to store
+    # TODO send output as string to ipfs to store
     #store_on_ipfs('test')
+
+
+    return output
+
+
