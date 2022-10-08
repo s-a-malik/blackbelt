@@ -1,8 +1,10 @@
 from flask import Flask, request
+from dotenv import load_dotenv
 
 import configurations
 from logic import security_score
 
+load_dotenv()   # load .env file
 app = Flask(__name__)
 print('ready')
 
@@ -10,7 +12,7 @@ print('ready')
 def hello_world():
     return "<p>Hello, World!</p>"
 
-@app.route("/carbon_density/<int:project_id>")
+@app.route("/security_score/<str:contract_address>")
 def security_score(contract_address):
     """
     Returns the security score and the metadata used to compute it for a given contract address
