@@ -11,8 +11,8 @@ print('ready')
 def hello_world():
     return "<p>Hello, World!</p>"
 
-@app.route("/security_score/<contract_address>")
-def security_score(contract_address):
+@app.route("/security_score")
+def security_score():
     """
     Returns the security score and the metadata used to compute it for a given contract address
     Params:
@@ -25,7 +25,10 @@ def security_score(contract_address):
         - balance (int): balance of the contract in wei
         - tx_count (int): number of transactions sent from the contract        
     """
-    score, contract_info = compute_security_score(contract_address)
+    contract_address = request.args.get('contract_address', type=str)
+    chain = request.args.get('chain', default="mainnet", type=str)
+    print(f"retrieving security score for {contract_address} on {chain}")
+    score, contract_info = compute_security_score(contract_address, chain)
     
     # submit to ipfs
 

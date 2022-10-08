@@ -1,31 +1,32 @@
 """Get data from etherscan.io
 """
+import os
+import json
+
+from dotenv import load_dotenv
+from bs4 import BeautifulSoup
 
 from utils.api_requests import get_request
-# import pandas as pd
-# from pandas import json_normalize
-import os
-from dotenv import load_dotenv
+
 
 load_dotenv()   # load .env file
 ETHERSCAN_KEY = os.getenv("ETHERSCAN_KEY")
 
 
-def _make_base_etherscan_url(chain="mainnet"):
+def _make_base_etherscan_url(chain="mainnet", url_type="api"):
     if chain == "mainnet":
-        base_url = "https://api.etherscan.io/api"
-    elif chain == "ropsten":
-        base_url = "https://api-ropsten.etherscan.io/api"
-    elif chain == "goerli":
-        base_url = "https://api-goerli.etherscan.io/api"
+        return "https://etherscan.io/" if url_type == "base" else "https://api.etherscan.io/api"
     else:
-        raise ValueError(f"Chain {chain} not supported")
+        if url_type == "base":
+            base_url = f"https://{chain}.etherscan.io/"
+        elif url_type == "api":
+            base_url = f"https://api-{chain}.etherscan.io/api"
     return base_url
 
 
 def is_verified(address, chain="mainnet"):
     # construct the request
-    base_url = _make_base_etherscan_url(chain)
+    base_url = _make_base_etherscan_url(chain, url_type="api")
     params = {
         "module": "contract",
         "action": "getabi",
@@ -40,7 +41,18 @@ def is_verified(address, chain="mainnet"):
 
 
 def is_audited(address, chain="mainnet"):
-    return True
+    # construct the url
+    base_url = _make_base_etherscan_url(chain, url_type="base")
+    url = f"{base_url}address/{address}#code"
+    # parse the html
+    page = get_request(url, headers={})
+
+    soup = BeautifulSoup(page.content, "lxml")
+    # extract the json
+    # x = soup.find('script', type='application/json').string
+    # data = json.loads(x)
+
+    pass
 
 
 if __name__ == "__main__":
