@@ -1,10 +1,17 @@
 """Methods for computing security score of contracts
 """
 import time
+from collections import defaultdict
 
 from sources.etherscan import is_verified, is_audited
 from sources.ipfs import store_on_ipfs
 from sources.coinbase import isSmartContract, numberOfTransactionsAndUsersAndAge
+
+# global variables
+contract_to_score = defaultdict(list) # {contract_address: [(score, timestamp, ipfs_hash)]}
+user_to_transactions = defaultdict(list)   # {wallet_address: [(score, timestamp, contract_address, ipfs_hash)] …}
+blacklist = defaultdict(int)  # {contract_address: count}
+
 
 def compute_security_score(contract_address, chain):
     """
@@ -35,11 +42,19 @@ def compute_security_score(contract_address, chain):
         "deployed_date_unix": deployed_date_unix
     }
 
-    output.update({"contract_address": contract_address, "score": score, "risk_assessment_timestamp": time.time(), "contract_info": contract_info})
+    output.update({
+        "contract_address": contract_address,
+        "security_score": score,
+        "risk_assessment_timestamp": int(time.time()),
+        "num_times_reported": blacklist["contract_address"],
+        "contract_info": contract_info,
+        # "ipfs_hash": store_on_ipfs(contract_info)
+        # "ipfs_hash": "test"
+    })
 
     # TODO send output as string to ipfs to store
-    #store_on_ipfs('test')
-
+    ipfs_hash = store_on_ipfs(output)
+    output.update({"ipfs_hash": ipfs_hash})
 
     return output
 

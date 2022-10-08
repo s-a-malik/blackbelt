@@ -22,6 +22,6 @@ def store_on_ipfs(input):
 
     resp = requests.post(f'{IPFS_NODE}:5001/api/v0/add', files=files, auth=(IPFS_ID, IPFS_SECRET))
     resp = resp.json()
-    
+    print(f"saved to ipfs: {resp['Hash']}")
     return resp['Hash']
     

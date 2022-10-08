@@ -28,6 +28,7 @@ Usage:
 - install requirements `pip install -r requirements.txt`
 - add API keys to .env file
 - run server
+
 TODO deploy on heroku etc.
 
 ### front-end
