@@ -2,6 +2,7 @@
 """
 
 from sources.etherscan import is_verified, is_audited
+from sources.ipfs import store_on_ipfs
 
 def compute_security_score(contract_address, chain):
     """
@@ -23,3 +24,6 @@ def compute_security_score(contract_address, chain):
     }
 
     return score, contract_info
+
+    #To-Do send output as string to ipfs to store
+    #store_on_ipfs('test')
