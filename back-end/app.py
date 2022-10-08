@@ -1,11 +1,12 @@
 from dotenv import load_dotenv
 
 from flask import Flask, request, Response
-
 from logic import compute_security_score, contract_to_score, user_to_transactions, blacklist
+from flask_cors import CORS
 
 load_dotenv()   # load .env file
 app = Flask(__name__)
+CORS(app)
 print('ready')
 
 @app.route("/")
