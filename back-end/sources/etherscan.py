@@ -32,7 +32,7 @@ def is_verified(address, chain="mainnet"):
         "address": address,
         "apikey": ETHERSCAN_KEY
     }
-    response = get_request(base_url, params=params)
+    response = get_request(base_url, params=params, headers=None)
     response = response.json()
     verified = True if response["status"] == "1" else False
 
@@ -40,7 +40,7 @@ def is_verified(address, chain="mainnet"):
 
 
 def is_audited(address, chain="mainnet"):
-    raise(NotImplementedError)
+    return True
 
 
 if __name__ == "__main__":
