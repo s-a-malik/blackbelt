@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv() 
 
 #Stores file on IPFS and returns hash
-def store_on_ipfs(input, ipfs_node=ipfs_node, ipfs_id=ipfs_id, ipfs_secret=ipfs_secret):
+def store_on_ipfs(input, ipfs_node, ipfs_id, ipfs_secret):
     """
     Stores file on IPFS and returns hash
     @params:
