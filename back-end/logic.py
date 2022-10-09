@@ -103,11 +103,6 @@ def compute_security_score(contract_address, chain):
     transactions, users, deployed_date_unix = numberOfTransactionsAndUsersAndAge(contract_address)
     min_age_of_contract_in_days = (time.time() - deployed_date_unix) / 86400
 
-    verified = True
-    audited = True
-    transactions, users, deployed_date_unix = 100, 10000, time.time()
-    min_age_of_contract_in_days = (time.time() - deployed_date_unix) / 86400
-
 
     #Calculate risk ratings
     risk_ratings =[]

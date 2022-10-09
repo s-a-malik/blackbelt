@@ -41,13 +41,13 @@ export async function getSecurityScore () {
     // fill in the security report
     document.getElementById("risk-level").innerHTML = data.risk_level;
     document.getElementById("security-score").innerHTML = data.security_score;
-    if (data.risk_level == "high") {
+    if (data.risk_level == "High") {
         document.getElementById("risk-level").style.color = "red";
     }
-    else if (data.risk_level == "medium") {
+    else if (data.risk_level == "Medium") {
         document.getElementById("risk-level").style.color = "orange";
     }
-    else if (data.risk_level == "low") {
+    else if (data.risk_level == "Low") {
         document.getElementById("risk-level").style.color = "green";
     }
     document.getElementById("audited").innerHTML = data.contract_info.audited;
