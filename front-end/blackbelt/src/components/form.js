@@ -73,9 +73,10 @@ return (
     bg={useColorModeValue('gray.50', 'gray.800')}>
     <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
-        <Heading fontSize={'4xl'}>Try it out yourself!</Heading>
+        <Heading fontSize={'4xl'}>Blackbelt - self-defence for web3 scams</Heading>
         <Text fontSize={'lg'} color={'gray.600'}>
-            Enter a contract address below <br></br> to gain vital security insights 🔥🔥
+            Blackbelt is a tool to help you assess the real-time security of a smart contract before interacting with it. <br></br> 
+            Try it below!
         </Text>
         </Stack>
         <Box
