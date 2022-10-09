@@ -39,7 +39,7 @@ def security_score():
     chain_id = request.args.get('chain', default=1, type=int)
     is_snaps = request.args.get('is_snaps', default=False, type=str)   # for cache
     is_snaps = True if is_snaps == "true" else False
-    if is_snaps:
+    if is_snaps and contract_address in contract_to_score:
         # retrieve from cache
         return contract_to_score[contract_address][0]
     else:

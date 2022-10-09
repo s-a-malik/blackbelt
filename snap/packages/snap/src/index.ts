@@ -24,7 +24,7 @@ export const onTransaction: OnTransactionHandler = async ({
   const chain_id =  chainId.split(":")[1];
   
   // Call api for risk assessment
-  const url = 'http://127.0.0.1:5000/security_score?contract_address='+contract_address+'&user_address='+user_address+'&chain='+chain_id+'is_snaps=true';
+  const url = 'http://127.0.0.1:5000/security_score?contract_address='+contract_address+'&user_address='+user_address+'&chain='+chain_id+'&is_snaps=true';
   // console.log(url);
   let x = await fetch(url);
   //let x = await fetch('http://127.0.0.1:5000/security_score?contract_address='+ contract_address + 'is_snaps=true');
@@ -41,7 +41,7 @@ export const onTransaction: OnTransactionHandler = async ({
     const individual_scores = stringify_json('individual_scores', data)
     const individual_details = stringify_json('contract_info', data)
     return {
-      insights: {"Risk Assessment": data.risk_level, "Security Score": data.security_score, "Recommendation": data.recommendation, "IPFS Storage Hash": data.ipfs_hash, "Individual Scores": individual_scores, "Details": individual_details, "Assessment Timestamp": data.risk_assessment_timestamp},
+      insights: {"Risk Assessment": data.risk_level, "Security Score": data.security_score, "Recommendation": data.recommendation, "Details": individual_details, "Individual Scores": individual_scores, "Assessment Timestamp": data.risk_assessment_timestamp, "IPFS Storage Hash": data.ipfs_hash},
     };
   } else if(data.status =='error, not a contract address'){
     return {

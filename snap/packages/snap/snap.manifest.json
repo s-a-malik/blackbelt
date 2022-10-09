@@ -1,13 +1,13 @@
 {
   "version": "0.2.0",
-  "description": "An example Snap written in TypeScript.",
-  "proposedName": "TypeScript Example Snap",
+  "description": "Defending you against scams with real-time data.",
+  "proposedName": "Blackbelt",
   "repository": {
     "type": "git",
     "url": "https://github.com/MetaMask/template-snap-monorepo.git"
   },
   "source": {
-    "shasum": "cqPM6o75sdkKeO6503QXeS5iC4wqrwZUa6HDl49jEBE=",
+    "shasum": "sVSSOvx+GVILxc6HGVpTbA5pF2kOiQ7+s1QNgp9oTn0=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
