@@ -58,7 +58,7 @@ def compute_security_score(contract_address, chain):
         "risk_assessment_timestamp": int(time.time()),
         "num_times_reported": blacklist["contract_address"],
         "contract_info": contract_info,
-        "recommentdation": "PLACEHOLDER", #TO-DO
+        "recommendation": "PLACEHOLDER", #TO-DO
         # "ipfs_hash": store_on_ipfs(contract_info)
         # "ipfs_hash": "test"
     })
