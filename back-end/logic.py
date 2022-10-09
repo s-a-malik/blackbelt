@@ -24,6 +24,11 @@ def compute_security_score(contract_address, chain):
         output["status"] = "error, not a contract address"
         return output
     
+    # check if chain is supported
+    if chain != "mainnet" and chain != "goerli":
+        output["status"] = "error, unsupported chain"
+        return output
+    
     verified = is_verified(contract_address, chain)
     audited = is_audited(contract_address, chain)
     transactions, users, deployed_date_unix = numberOfTransactionsAndUsersAndAge(contract_address)
@@ -53,10 +58,23 @@ def compute_security_score(contract_address, chain):
         "risk_assessment_timestamp": int(time.time()),
         "num_times_reported": blacklist["contract_address"],
         "contract_info": contract_info,
+        "recommentdation: "PLACEHOLDER", #TO-DO
         # "ipfs_hash": store_on_ipfs(contract_info)
         # "ipfs_hash": "test"
     })
 
+    #TO-DO: currently placeholder
+    output.update(
+       {"individual_scores": {
+      "audited": 100, 
+      "deployed_date": 100, 
+      "number_of_transactions": 50, 
+      "number_of_unique_users": 25, 
+      "verified": 75
+      }})
+        
+    
+    
     # TODO send output as string to ipfs to store
     ipfs_hash = store_on_ipfs(output)
     output.update({"ipfs_hash": ipfs_hash})
