@@ -7,20 +7,20 @@ directly in your wallet. This is vital for improving the security of new and non
 
 ## Overview
 
-We provide security for metamask to avoid front end exploits.
+We provide security assessments for smart contract interactions directly in metamask and on our website. The risk score is calculated in real-time based on on-chain data.
 
 ## Repo Structure and Stack
 
 Stack:
 
 - Metamask snap
-- coinbase cloud Node for web3 data
-- etherscan API for contract information
+- Coinbase cloud Node for web3 data
+- Etherscan API for contract information
 - IPFS for storing security score computation information
 
 ### back-end
 
-Server for retrieving blockchain data and computing security score.
+Flask server for retrieving blockchain data and computing security score.
 
 Usage:
 
