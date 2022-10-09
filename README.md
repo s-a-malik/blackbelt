@@ -19,7 +19,7 @@ Stack:
 - Coinbase cloud Node for web3 data
 - Etherscan API for contract information
 - IPFS for storing security score computation information
-- 
+- PocketNetwork node client
 - Solidity and Polygon testnet to test our revert feature:
    - https://mumbai.polygonscan.com/tx/0x990e5be972a7c79a700b97f72ba77df1ff934669c5bab1097243a01fd73194cc
    - https://mumbai.polygonscan.com/tx/0x7d4931f717df02d7f64b6610552ffc56a87098921c3e5e99ac340c989e637cd5
