@@ -9,6 +9,7 @@ import {
 import { ColorModeSwitcher } from '../../ColorModeSwitcher';
 import { Logo } from '../../Logo';
 import { SimpleCard } from '../../components/form'
+import { Results } from '../../components/results'
 
 export function MainPage() {
     return (

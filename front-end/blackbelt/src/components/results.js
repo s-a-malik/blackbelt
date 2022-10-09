@@ -9,44 +9,50 @@ import {
     HStack,
     VStack,
   } from '@chakra-ui/react';
-  import { CheckIcon } from '@chakra-ui/icons';
-  
-  // Replace test data with your own
-  const features = Array.apply(null, Array(8)).map(function (x, i) {
-    return {
-      id: i,
-      title: 'Lorem ipsum dolor sit amet',
-      text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.',
-    };
-  });
-  
-  export default function GridListWithHeading() {
-    return (
-      <Box p={4}>
-        <Stack spacing={4} as={Container} maxW={'3xl'} textAlign={'center'}>
-          <Heading fontSize={'3xl'}>This is the headline</Heading>
-          <Text color={'gray.600'} fontSize={'xl'}>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-            sed diam voluptua.
-          </Text>
-        </Stack>
-  
-        <Container maxW={'6xl'} mt={10}>
-          <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={10}>
-            {features.map((feature) => (
-              <HStack key={feature.id} align={'top'}>
-                <Box color={'green.400'} px={2}>
-                  <Icon as={CheckIcon} />
-                </Box>
-                <VStack align={'start'}>
-                  <Text fontWeight={600}>{feature.title}</Text>
-                  <Text color={'gray.600'}>{feature.text}</Text>
-                </VStack>
-              </HStack>
-            ))}
-          </SimpleGrid>
-        </Container>
-      </Box>
-    );
-  }
+import { CheckIcon } from '@chakra-ui/icons';
+
+// Replace test data with your own
+// const features = Array.apply(null, Array(8)).map(function (x, i) {
+// return {
+//     id: i,
+//     title: 'Lorem ipsum dolor sit amet',
+//     text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.',
+// };
+// });
+
+export function Results() {
+return (
+    <Box p={4}>
+    <Stack spacing={4} as={Container} maxW={'3xl'} textAlign={'center'}>
+        <Heading fontSize={'3xl'}>Security Report:</Heading>
+        <Text color={'gray.600'} fontSize={'xl'}>
+            Overall Risk level: <b><span id="risk-level"></span></b> 
+            <br></br>
+            Security Score: <b><span id="security-score"></span></b>
+            <br></br>
+        </Text>
+    </Stack>
+        <SimpleGrid columns={2} spacing={30} textAlign={'left'}>
+            <Box color={'black.400'} height='40px' id="">
+                {/* <CheckIcon color={'green.500'} /> */}
+                <Text fontSize={'l'}>Source Code Verified on Etherscan: <b><span id="verified"></span></b></Text>
+            </Box>
+            <Box color={'black.400'} height='40px'>
+                <Text fontSize={'l'}>Source Code Audited: <b><span id="audited"></span></b></Text>
+            </Box>
+            <Box color={'black.400'} height='40px'>
+                <Text fontSize={'l'}>Contract Age (days): <b><span id="age"></span></b></Text>
+            </Box>
+            <Box color={'black.400'} height='40px'>
+                <Text fontSize={'l'}>Number of Transactions: <b><span id="transactions"></span></b></Text>
+            </Box>
+            <Box color={'black.400'} height='40px'>
+                <Text fontSize={'l'}>Number of Unique Users: <b><span id="users"></span></b></Text>
+            </Box>
+            <Box color={'black.400'} height='40px'>
+                <Text fontSize={'l'}>Number of Times Reported: <b><span id="reported"></span></b></Text>
+            </Box>
+        </SimpleGrid>
+    </Box>
+);
+}

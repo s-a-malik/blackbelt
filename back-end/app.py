@@ -65,7 +65,7 @@ def blacklist():
 
 
 @app.route("/prev_transactions")
-@cross_origin(origin='*', headers=['Content-Type', 'Authorization'])
+@cross_origin(origin='localhost', headers=['Content-Type', 'Authorization'])
 def prev_transactions():
     """
     Returns the previous transactions with security scores for a given wallet address

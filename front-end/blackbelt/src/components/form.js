@@ -14,7 +14,8 @@ import {
   } from '@chakra-ui/react';
 import { FaBorderNone } from 'react-icons/fa';
 
-const BACKEND_URL = "http://127.0.0.1:5000/"
+// const BACKEND_URL = "http://127.0.0.1:5000/"
+const BACKEND_URL = "http://10.60.4.212:5000/"
 
 export async function getSecurityScore () {
     var contract_address = document.getElementById("contract-address").value;
@@ -36,14 +37,32 @@ export async function getSecurityScore () {
     .then((response) => response.json())
     .then((data) => {
     console.log(data);
-    // document.getElementById("score").innerHTML = data.score;
-    })
+    
+    // fill in the security report
+    document.getElementById("risk-level").innerHTML = data.risk_level;
+    document.getElementById("security-score").innerHTML = data.security_score;
+    if (data.risk_level == "high") {
+        document.getElementById("risk-level").style.color = "red";
+    }
+    else if (data.risk_level == "medium") {
+        document.getElementById("risk-level").style.color = "orange";
+    }
+    else if (data.risk_level == "low") {
+        document.getElementById("risk-level").style.color = "green";
+    }
+    document.getElementById("audited").innerHTML = data.contract_info.audited;
+    document.getElementById("verified").innerHTML = data.contract_info.verified;
+    document.getElementById("age").innerHTML = data.contract_info.min_age_of_contract_in_days;
+    document.getElementById("transactions").innerHTML = data.contract_info.number_of_transactions;
+    document.getElementById("users").innerHTML = data.contract_info.number_of_unique_users;
+    document.getElementById("reported").innerHTML = data.contract_info.num_times_reported;
+})
 }
 
 export function SimpleCard() {
 return (
     <Flex
-    minH={'100vh'}
+    minH={'10vh'}
     align={'center'}
     justify={'center'}
     bg={useColorModeValue('gray.50', 'gray.800')}>
