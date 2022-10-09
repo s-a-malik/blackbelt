@@ -365,3 +365,5 @@ dist
 .yarn/install-state.gz
 .pnp.*
 Footer
+
+*.zip
