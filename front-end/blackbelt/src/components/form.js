@@ -12,7 +12,7 @@ import {
     Text,
     useColorModeValue,
   } from '@chakra-ui/react';
-import { FaBorderNone } from 'react-icons/fa';
+import { FaBorderNone, FaDigitalTachograph } from 'react-icons/fa';
 
 // const BACKEND_URL = "http://127.0.0.1:5000/"
 const BACKEND_URL = "http://10.60.4.212:5000/"
@@ -37,25 +37,30 @@ export async function getSecurityScore () {
     .then((response) => response.json())
     .then((data) => {
     console.log(data);
-    
-    // fill in the security report
-    document.getElementById("risk-level").innerHTML = data.risk_level;
-    document.getElementById("security-score").innerHTML = data.security_score;
-    if (data.risk_level == "High") {
-        document.getElementById("risk-level").style.color = "red";
+    if (data.status != "ok") {
+        alert(data.status);
     }
-    else if (data.risk_level == "Medium") {
-        document.getElementById("risk-level").style.color = "orange";
+    else {
+        // fill in the security report
+        document.getElementById("contract-address-out").innerHTML = contract_address;
+        document.getElementById("risk-level").innerHTML = data.risk_level;
+        document.getElementById("security-score").innerHTML = data.security_score;
+        if (data.risk_level == "High") {
+            document.getElementById("risk-level").style.color = "red";
+        }
+        else if (data.risk_level == "Medium") {
+            document.getElementById("risk-level").style.color = "orange";
+        }
+        else if (data.risk_level == "Low") {
+            document.getElementById("risk-level").style.color = "green";
+        }
+        document.getElementById("audited").innerHTML = data.contract_info.audited;
+        document.getElementById("verified").innerHTML = data.contract_info.verified;
+        document.getElementById("age").innerHTML = data.contract_info.min_age_of_contract_in_days;
+        document.getElementById("transactions").innerHTML = data.contract_info.number_of_transactions;
+        document.getElementById("users").innerHTML = data.contract_info.number_of_unique_users;
+        document.getElementById("reported").innerHTML = data.num_times_reported;
     }
-    else if (data.risk_level == "Low") {
-        document.getElementById("risk-level").style.color = "green";
-    }
-    document.getElementById("audited").innerHTML = data.contract_info.audited;
-    document.getElementById("verified").innerHTML = data.contract_info.verified;
-    document.getElementById("age").innerHTML = data.contract_info.min_age_of_contract_in_days;
-    document.getElementById("transactions").innerHTML = data.contract_info.number_of_transactions;
-    document.getElementById("users").innerHTML = data.contract_info.number_of_unique_users;
-    document.getElementById("reported").innerHTML = data.num_times_reported;
 })
 }
 
@@ -94,7 +99,7 @@ return (
                 type='submit'
                 onClick={async () => await getSecurityScore()}
                 _hover={{
-                bg: 'blue.500'
+                bg: 'purple.600'
                 }}>
                 Rate now
             </Button>

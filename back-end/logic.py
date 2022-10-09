@@ -12,7 +12,7 @@ from sources.coinbase import isSmartContract, numberOfTransactionsAndUsersAndAge
 # global variables
 contract_to_score = defaultdict(list) # {contract_address: [(score, timestamp, ipfs_hash)]}
 user_to_transactions = defaultdict(list)   # {wallet_address: [(score, timestamp, contract_address, ipfs_hash)] …}
-blacklist = defaultdict(int)  # {contract_address: count}
+blacklist_dict = defaultdict(int)  # {contract_address: count}
 
 #Rating functions
 #Activation functions
@@ -156,7 +156,7 @@ def compute_security_score(contract_address, chain):
         "security_score": score,
         "risk_level": risk_level,
         "risk_assessment_timestamp": str(datetime.fromtimestamp(int(time.time()))),
-        "num_times_reported": blacklist["contract_address"],
+        "num_times_reported": blacklist_dict[contract_address],
         "contract_info": contract_info,
         "recommendation": recommendation,
         # "ipfs_hash": store_on_ipfs(contract_info)

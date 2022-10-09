@@ -4,7 +4,7 @@ import os
 from flask import Flask, request, Response
 from flask_cors import CORS, cross_origin
 
-from logic import compute_security_score, contract_to_score, user_to_transactions, blacklist
+from logic import compute_security_score, contract_to_score, user_to_transactions, blacklist_dict
 
 
 load_dotenv()   # load .env file
@@ -48,24 +48,44 @@ def security_score():
     contract_to_score[contract_address].append({"security_score": output["security_score"], "risk_assessment_timestamp": output["risk_assessment_timestamp"], "ipfs": output["ipfs_hash"]})
     user_to_transactions[user_address].append({"security_score": output["security_score"], "contract_address": contract_address, "risk_assessment_timestamp": output["risk_assessment_timestamp"], "ipfs": output["ipfs_hash"]})
     
+    # output = {
+    #     "contract_address": "0x984e7B3f332a2a6Fc1EB73B5B8F8E95D24ee2097", 
+    #     "contract_info": {
+    #         "audited": False, 
+    #         "min_age_of_contract_in_days": 0.9696542505450823, 
+    #         "number_of_transactions": 5541, 
+    #         "number_of_unique_users": 3329, 
+    #         "verified": True
+    #     }, 
+    #     "individual_scores": {
+    #         "audited": 0, 
+    #         "contract_age": 0.27, 
+    #         "number_of_transactions": 57.5, 
+    #         "number_of_unique_users": 100, 
+    #         "verified": 100
+    #     }, 
+    #     "ipfs_hash": "test", 
+    #     "num_times_reported": 0, 
+    #     "recommendation": "Medium risk classification. Be cautious and double check the contract", 
+    #     "risk_assessment_timestamp": "2022-10-09 02:40:29", 
+    #     "risk_level": "Medium", 
+    #     "security_score": 51.55, 
+    #     "status": "ok"
+    # }
     return output
-
-    # test = {"test": "test"}
-    return test
     
 
-
-@app.route("/blacklist", methods=['POST'])
+@app.route("/blacklist", methods=['GET'])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def blacklist():
     """Flag a contract to the blacklist
     """
     contract_address = request.args.get('contract_address', type=str)
     print(f"blacklisting {contract_address}")
-   
-    blacklist[contract_address] += 1
-
-    return Response({"status": "ok"}, status=200)
+    print(blacklist_dict)
+    print(blacklist_dict[contract_address])
+    blacklist_dict[contract_address] += 1
+    return {"status": "ok"}
 
 
 @app.route("/prev_transactions")

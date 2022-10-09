@@ -9,20 +9,16 @@ import {
 } from '@chakra-ui/react';
 import { MainPage } from "./pages";
 import { Nav } from "./components/nav";
-import { UserContextProvider } from './lib/UserContext';
 
 export default function App() {
   return (
-    <ChakraProvider>
-        {/* <UserContextProvider> */}
-        
+    <ChakraProvider>        
         <Router>
         <Nav/>
             <Routes>
             <Route path="/" element={<MainPage />} />
             </Routes>
         </Router>
-        {/* </UserContextProvider> */}
     </ChakraProvider>
   );
 }
