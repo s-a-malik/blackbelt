@@ -60,7 +60,7 @@ def get_verified_rating(verified):
 
 #Get penalty for reporting
 def get_penalty(num_times_reported):
-    return linear(0,10, num_times_reported)
+    return linear(0,25, num_times_reported)
 
 #Calculate total score
 def total_score(ratings):
@@ -143,7 +143,7 @@ def compute_security_score(contract_address, chain):
     reporting_penalty = get_penalty(num_times_reported)
         
     #Calculate total scores
-    score = total_score(risk_ratings) - reporting_penalty
+    score = max(total_score(risk_ratings) - reporting_penalty,0)
     risk_level = classify_risk(score)
     recommendation = get_recommendation(risk_level)
 
