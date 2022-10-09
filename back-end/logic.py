@@ -29,20 +29,21 @@ def compute_security_score(contract_address, chain):
     transactions, users, deployed_date_unix = numberOfTransactionsAndUsersAndAge(contract_address)
     min_age_of_contract_in_days = (time.time() - deployed_date_unix) / 86400
     score = 0
+
     # logic
     if not verified:
         score = 0
     if audited:
         score += 100
 
-    risk_level = "low" if score < 50 else "medium" if score < 75 else "high"
+    risk_level = "high" if score < 50 else "medium" if score < 75 else "low"
 
     contract_info = {
         "verified": verified,
         "audited": audited,
         "number_of_transactions": transactions,
         "number_of_unique_users": users,
-        "min_age_of_contract_in_days": deployed_date_unix
+        "min_age_of_contract_in_days": min_age_of_contract_in_days
     }
 
     output.update({

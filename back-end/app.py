@@ -21,7 +21,7 @@ def security_score():
     Params:
     - user_address: the address of the user to check
     - contract_address (str): eth address of the contract
-    - chain (str): chain to check the contract on
+    - chain_id (int): chain to check the contract on
     Returns:
     - score (int): The security score (0-100)
     - contract_info (dict): 
@@ -31,7 +31,9 @@ def security_score():
     """
     user_address = request.args.get('user_address', type=str)
     contract_address = request.args.get('contract_address', type=str)
-    chain = request.args.get('chain', default="mainnet", type=str)
+    chain_id = request.args.get('chain', default=1, type=int)
+    chain = "mainnet" if chain_id == 1 else "goerli"
+
     print(f"retrieving security score for {contract_address} on {chain}")
     output = compute_security_score(contract_address, chain)
     if output["status"] != "ok":
