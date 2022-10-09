@@ -13,7 +13,7 @@ def _make_base_coinbase_url(chain="mainnet"):
     if chain == "mainnet":
         return "https://mainnet.ethereum.coinbasecloud.net"
     elif chain == "goerli":
-        return "https://goerli.ethereum.coinbasecloud.com"
+        return "https://goerli.ethereum.coinbasecloud.net"
     else:
         raise ValueError(f"Chain {chain} not supported")
 
@@ -61,9 +61,8 @@ def coinbaseCloud_getTransactionsByAddress(address: str, blockEnd: str = '', cha
     return response.json()
 
 
-def isSmartContract(address: str):
-    url = _make_base_coinbase_url(chain='mainnet')
-
+def isSmartContract(address: str, chain: str = 'mainnet'):
+    url = _make_base_coinbase_url(chain)
     payload = json.dumps({
         "id": 1,
         "jsonrpc": "2.0",
@@ -75,7 +74,7 @@ def isSmartContract(address: str):
     })
     headers = {
         'Content-Type': 'application/json',
-        'Authorization': 'Basic QllER0hQVUFXUTZQVTdZUU5YQU46VUVER0ROQjRaNTdOS0hJQkJXMkM3NUZHVTIzQTRHRTY3S1hEWlhZSQ=='
+        'Authorization': f'Basic {COINBASE_KEY}'
     }
 
     response = post_request(url, headers=headers, data=payload).json()
@@ -122,6 +121,10 @@ def numberOfTransactionsAndUsersAndAge(address: str, chain: str = 'mainnet'):
     while (blockEnd == '' or int(blockEnd, 16) > 0) and counter < 10:
 
         response = coinbaseCloud_getTransactionsByAddress(address, blockEnd, chain)
+
+        if 'result' not in response.keys() or 'blocks' not in response['result']:
+            break
+        
         blocks = response['result']['blocks']
 
         total_count_transactions += countBlocksTransactions(blocks)
