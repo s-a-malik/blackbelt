@@ -37,7 +37,7 @@ def security_score():
     print(f"retrieving security score for {contract_address} on {chain}")
     output = compute_security_score(contract_address, chain)
     if output["status"] != "ok":
-        return Response(output, status=400)
+        return output
 
     # add to the server cache
     contract_to_score[contract_address].append({"security_score": output["security_score"], "risk_assessment_timestamp": output["risk_assessment_timestamp"], "ipfs": output["ipfs_hash"]})

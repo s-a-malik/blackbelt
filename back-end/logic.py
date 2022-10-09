@@ -20,7 +20,7 @@ def compute_security_score(contract_address, chain):
     """
     output = {"status": "ok"}
     # check if EOA first
-    if not isSmartContract(contract_address):
+    if not isSmartContract(contract_address, chain):
         output["status"] = "error, not a contract address"
         return output
     
