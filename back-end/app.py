@@ -1,8 +1,11 @@
 from dotenv import load_dotenv
+import os
 
 from flask import Flask, request, Response
-from logic import compute_security_score, contract_to_score, user_to_transactions, blacklist
 from flask_cors import CORS, cross_origin
+
+from logic import compute_security_score, contract_to_score, user_to_transactions, blacklist
+
 
 load_dotenv()   # load .env file
 app = Flask(__name__)
@@ -86,4 +89,6 @@ if __name__ == '__main__':
 
     app.config.from_object('configurations.DevelopmentConfig')
     # app.config.from_object('configurations.ProductionConfig')
-    app.run()
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
+    # app.run()
