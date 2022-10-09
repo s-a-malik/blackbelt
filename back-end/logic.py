@@ -76,8 +76,9 @@ def compute_security_score(contract_address, chain):
     
     
     # TODO send output as string to ipfs to store
-    ipfs_hash = store_on_ipfs(output)
-    output.update({"ipfs_hash": ipfs_hash})
+    # ipfs_hash = store_on_ipfs(output)
+    # output.update({"ipfs_hash": ipfs_hash})
+    output.update({"ipfs_hash": "test"})
 
     return output
 

@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 
 from flask import Flask, request, Response
 from logic import compute_security_score, contract_to_score, user_to_transactions, blacklist
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 load_dotenv()   # load .env file
 app = Flask(__name__)
@@ -10,10 +10,12 @@ CORS(app)
 print('ready')
 
 @app.route("/")
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def hello_world():
     return "<p>Hello, World!</p>"
 
 @app.route("/security_score", methods=['GET'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def security_score():
     """
     Returns the security score and the metadata used to compute it for a given contract address.
@@ -47,6 +49,7 @@ def security_score():
 
 
 @app.route("/blacklist", methods=['POST'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def blacklist():
     """Flag a contract to the blacklist
     """
@@ -59,6 +62,7 @@ def blacklist():
 
 
 @app.route("/prev_transactions")
+@cross_origin(origin='*', headers=['Content-Type', 'Authorization'])
 def prev_transactions():
     """
     Returns the previous transactions with security scores for a given wallet address
