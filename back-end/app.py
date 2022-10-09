@@ -37,16 +37,20 @@ def security_score():
     user_address = request.args.get('user_address', type=str)
     contract_address = request.args.get('contract_address', type=str)
     chain_id = request.args.get('chain', default=1, type=int)
-    chain = "mainnet" if chain_id == 1 else "goerli"
+    is_snaps = request.args.get('is_snaps', default=False, type=bool)   # for cache
+    if is_snaps:
+        # retrieve from cache
+        return contract_to_score[contract_address][0]
+    else:
+        chain = "mainnet" if chain_id == 1 else "goerli"
+        print(f"retrieving security score for {contract_address} on {chain}")
+        output = compute_security_score(contract_address, chain)
+        if output["status"] != "ok":
+            return output
 
-    print(f"retrieving security score for {contract_address} on {chain}")
-    output = compute_security_score(contract_address, chain)
-    if output["status"] != "ok":
-        return output
-
-    # add to the server cache
-    contract_to_score[contract_address].append({"security_score": output["security_score"], "risk_assessment_timestamp": output["risk_assessment_timestamp"], "ipfs": output["ipfs_hash"]})
-    user_to_transactions[user_address].append({"security_score": output["security_score"], "contract_address": contract_address, "risk_assessment_timestamp": output["risk_assessment_timestamp"], "ipfs": output["ipfs_hash"]})
+        # add to the server cache
+        contract_to_score[contract_address].append(output)
+        user_to_transactions[user_address].append(output)
     
     # output = {
     #     "contract_address": "0x984e7B3f332a2a6Fc1EB73B5B8F8E95D24ee2097", 
