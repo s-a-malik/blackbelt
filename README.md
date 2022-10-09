@@ -7,7 +7,9 @@ directly in your wallet. This is vital for improving the security of new and non
 
 ## Overview
 
-We provide security assessments for smart contract interactions directly in metamask and on our website. The risk score is calculated in real-time based on on-chain data.
+We provide security assessments for smart contract interactions directly in metamask and on our website. The risk score is calculated in real-time based on on-chain data. 
+
+Furthermore, we experimented with a revert feature that transforms the transaction focused execution to an intend focused value transfer. The feature uses a smart contract to check if the balance changes are in line with what is expected and reverts the transaction if the criteria is not fulfilled. 
 
 ## Repo Structure and Stack
 
@@ -17,6 +19,7 @@ Stack:
 - Coinbase cloud Node for web3 data
 - Etherscan API for contract information
 - IPFS for storing security score computation information
+- 
 - Solidity and Polygon testnet to test our revert feature:
    - https://mumbai.polygonscan.com/tx/0x990e5be972a7c79a700b97f72ba77df1ff934669c5bab1097243a01fd73194cc
    - https://mumbai.polygonscan.com/tx/0x7d4931f717df02d7f64b6610552ffc56a87098921c3e5e99ac340c989e637cd5
