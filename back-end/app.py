@@ -34,44 +34,44 @@ def security_score():
         - balance (int): balance of the contract in wei
         - tx_count (int): number of transactions sent from the contract        
     """
-    user_address = request.args.get('user_address', type=str)
-    contract_address = request.args.get('contract_address', type=str)
-    chain_id = request.args.get('chain', default=1, type=int)
-    chain = "mainnet" if chain_id == 1 else "goerli"
+    # user_address = request.args.get('user_address', type=str)
+    # contract_address = request.args.get('contract_address', type=str)
+    # chain_id = request.args.get('chain', default=1, type=int)
+    # chain = "mainnet" if chain_id == 1 else "goerli"
 
-    print(f"retrieving security score for {contract_address} on {chain}")
-    output = compute_security_score(contract_address, chain)
-    if output["status"] != "ok":
-        return output
+    # print(f"retrieving security score for {contract_address} on {chain}")
+    # output = compute_security_score(contract_address, chain)
+    # if output["status"] != "ok":
+    #     return output
 
-    # add to the server cache
-    contract_to_score[contract_address].append({"security_score": output["security_score"], "risk_assessment_timestamp": output["risk_assessment_timestamp"], "ipfs": output["ipfs_hash"]})
-    user_to_transactions[user_address].append({"security_score": output["security_score"], "contract_address": contract_address, "risk_assessment_timestamp": output["risk_assessment_timestamp"], "ipfs": output["ipfs_hash"]})
+    # # add to the server cache
+    # contract_to_score[contract_address].append({"security_score": output["security_score"], "risk_assessment_timestamp": output["risk_assessment_timestamp"], "ipfs": output["ipfs_hash"]})
+    # user_to_transactions[user_address].append({"security_score": output["security_score"], "contract_address": contract_address, "risk_assessment_timestamp": output["risk_assessment_timestamp"], "ipfs": output["ipfs_hash"]})
     
-    # output = {
-    #     "contract_address": "0x984e7B3f332a2a6Fc1EB73B5B8F8E95D24ee2097", 
-    #     "contract_info": {
-    #         "audited": False, 
-    #         "min_age_of_contract_in_days": 0.9696542505450823, 
-    #         "number_of_transactions": 5541, 
-    #         "number_of_unique_users": 3329, 
-    #         "verified": True
-    #     }, 
-    #     "individual_scores": {
-    #         "audited": 0, 
-    #         "contract_age": 0.27, 
-    #         "number_of_transactions": 57.5, 
-    #         "number_of_unique_users": 100, 
-    #         "verified": 100
-    #     }, 
-    #     "ipfs_hash": "test", 
-    #     "num_times_reported": 0, 
-    #     "recommendation": "Medium risk classification. Be cautious and double check the contract", 
-    #     "risk_assessment_timestamp": "2022-10-09 02:40:29", 
-    #     "risk_level": "Medium", 
-    #     "security_score": 51.55, 
-    #     "status": "ok"
-    # }
+    output = {
+        "contract_address": "0x984e7B3f332a2a6Fc1EB73B5B8F8E95D24ee2097", 
+        "contract_info": {
+            "audited": False, 
+            "min_age_of_contract_in_days": 0.9696542505450823, 
+            "number_of_transactions": 5541, 
+            "number_of_unique_users": 3329, 
+            "verified": True
+        }, 
+        "individual_scores": {
+            "audited": 0, 
+            "contract_age": 0.27, 
+            "number_of_transactions": 57.5, 
+            "number_of_unique_users": 100, 
+            "verified": 100
+        }, 
+        "ipfs_hash": "test", 
+        "num_times_reported": 0, 
+        "recommendation": "Medium risk classification. Be cautious and double check the contract", 
+        "risk_assessment_timestamp": "2022-10-09 02:40:29", 
+        "risk_level": "Medium", 
+        "security_score": 51.55, 
+        "status": "ok"
+    }
     return output
     
 
