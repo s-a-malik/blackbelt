@@ -58,6 +58,10 @@ def get_verified_rating(verified):
     else:
         return 0
 
+#Get penalty for reporting
+def get_penalty(num_times_reported):
+    return linear(0,10, num_times_reported)
+
 #Calculate total score
 def total_score(ratings):
     return round(sum(ratings)/len(ratings),2)
@@ -102,7 +106,7 @@ def compute_security_score(contract_address, chain):
     audited = is_audited(contract_address, chain)
     transactions, users, deployed_date_unix = numberOfTransactionsAndUsersAndAge(contract_address)
     min_age_of_contract_in_days = (time.time() - deployed_date_unix) / 86400
-
+    num_times_reported = blacklist_dict[contract_address]
 
     #Calculate risk ratings
     risk_ratings =[]
@@ -136,8 +140,10 @@ def compute_security_score(contract_address, chain):
     else:
         user_rating = None
 
+    reporting_penalty = get_penalty(num_times_reported)
+        
     #Calculate total scores
-    score = total_score(risk_ratings)
+    score = total_score(risk_ratings) - reporting_penalty
     risk_level = classify_risk(score)
     recommendation = get_recommendation(risk_level)
 
@@ -156,7 +162,7 @@ def compute_security_score(contract_address, chain):
         "security_score": score,
         "risk_level": risk_level,
         "risk_assessment_timestamp": str(datetime.fromtimestamp(int(time.time()))),
-        "num_times_reported": blacklist_dict[contract_address],
+        "num_times_reported": num_times_reported,
         "contract_info": contract_info,
         "recommendation": recommendation,
         # "ipfs_hash": store_on_ipfs(contract_info)
