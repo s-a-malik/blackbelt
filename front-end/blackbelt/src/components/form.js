@@ -55,7 +55,7 @@ export async function getSecurityScore () {
     document.getElementById("age").innerHTML = data.contract_info.min_age_of_contract_in_days;
     document.getElementById("transactions").innerHTML = data.contract_info.number_of_transactions;
     document.getElementById("users").innerHTML = data.contract_info.number_of_unique_users;
-    document.getElementById("reported").innerHTML = data.contract_info.num_times_reported;
+    document.getElementById("reported").innerHTML = data.num_times_reported;
 })
 }
 
@@ -68,9 +68,9 @@ return (
     bg={useColorModeValue('gray.50', 'gray.800')}>
     <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
-        <Heading fontSize={'4xl'}>Test it out yourself!</Heading>
+        <Heading fontSize={'4xl'}>Try it out yourself!</Heading>
         <Text fontSize={'lg'} color={'gray.600'}>
-            Enter a contract address below <br></br> to gain security insights 🔥🔥
+            Enter a contract address below <br></br> to gain vital security insights 🔥🔥
         </Text>
         </Stack>
         <Box
@@ -89,7 +89,7 @@ return (
             </FormControl>
             <Stack spacing={10}>
             <Button
-                bg={'blue.400'}
+                bg={'purple.400'}
                 color={'white'}
                 type='submit'
                 onClick={async () => await getSecurityScore()}

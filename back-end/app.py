@@ -34,21 +34,25 @@ def security_score():
         - balance (int): balance of the contract in wei
         - tx_count (int): number of transactions sent from the contract        
     """
-    user_address = request.args.get('user_address', type=str)
-    contract_address = request.args.get('contract_address', type=str)
-    chain_id = request.args.get('chain', default=1, type=int)
-    chain = "mainnet" if chain_id == 1 else "goerli"
+    # user_address = request.args.get('user_address', type=str)
+    # contract_address = request.args.get('contract_address', type=str)
+    # chain_id = request.args.get('chain', default=1, type=int)
+    # chain = "mainnet" if chain_id == 1 else "goerli"
 
-    print(f"retrieving security score for {contract_address} on {chain}")
-    output = compute_security_score(contract_address, chain)
-    if output["status"] != "ok":
-        return output
+    # print(f"retrieving security score for {contract_address} on {chain}")
+    # output = compute_security_score(contract_address, chain)
+    # if output["status"] != "ok":
+    #     return output
 
-    # add to the server cache
-    contract_to_score[contract_address].append({"security_score": output["security_score"], "risk_assessment_timestamp": output["risk_assessment_timestamp"], "ipfs": output["ipfs_hash"]})
-    user_to_transactions[user_address].append({"security_score": output["security_score"], "contract_address": contract_address, "risk_assessment_timestamp": output["risk_assessment_timestamp"], "ipfs": output["ipfs_hash"]})
+    # # add to the server cache
+    # contract_to_score[contract_address].append({"security_score": output["security_score"], "risk_assessment_timestamp": output["risk_assessment_timestamp"], "ipfs": output["ipfs_hash"]})
+    # user_to_transactions[user_address].append({"security_score": output["security_score"], "contract_address": contract_address, "risk_assessment_timestamp": output["risk_assessment_timestamp"], "ipfs": output["ipfs_hash"]})
+    
+    # return output
 
-    return output
+    test = {"test": "test"}
+    return test
+    
 
 
 @app.route("/blacklist", methods=['POST'])

@@ -35,10 +35,10 @@ return (
         <SimpleGrid columns={2} spacing={30} textAlign={'left'}>
             <Box color={'black.400'} height='40px' id="">
                 {/* <CheckIcon color={'green.500'} /> */}
-                <Text fontSize={'l'}>Source Code Verified on Etherscan: <b><span id="verified"></span></b></Text>
+                <Text fontSize={'l'}>Source Code Verified on Etherscan?: <b><span id="verified"></span></b></Text>
             </Box>
             <Box color={'black.400'} height='40px'>
-                <Text fontSize={'l'}>Source Code Audited: <b><span id="audited"></span></b></Text>
+                <Text fontSize={'l'}>Source Code Audited?: <b><span id="audited"></span></b></Text>
             </Box>
             <Box color={'black.400'} height='40px'>
                 <Text fontSize={'l'}>Contract Age (days): <b><span id="age"></span></b></Text>
@@ -50,7 +50,7 @@ return (
                 <Text fontSize={'l'}>Number of Unique Users: <b><span id="users"></span></b></Text>
             </Box>
             <Box color={'black.400'} height='40px'>
-                <Text fontSize={'l'}>Number of Times Reported: <b><span id="reported"></span></b></Text>
+                <Text fontSize={'l'}>Number of Times Reported to Blackbelt: <b><span id="reported"></span></b></Text>
             </Box>
         </SimpleGrid>
     </Box>
