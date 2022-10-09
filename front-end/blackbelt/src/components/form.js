@@ -44,7 +44,7 @@ export async function getSecurityScore () {
         // fill in the security report
         document.getElementById("contract-address-out").innerHTML = contract_address;
         document.getElementById("risk-level").innerHTML = data.risk_level;
-        document.getElementById("security-score").innerHTML = data.security_score;
+        document.getElementById("security-score").innerHTML = parseFloat(data.security_score).toFixed(2);
         if (data.risk_level == "High") {
             document.getElementById("risk-level").style.color = "red";
         }
@@ -56,7 +56,7 @@ export async function getSecurityScore () {
         }
         document.getElementById("audited").innerHTML = data.contract_info.audited;
         document.getElementById("verified").innerHTML = data.contract_info.verified;
-        document.getElementById("age").innerHTML = data.contract_info.min_age_of_contract_in_days;
+        document.getElementById("age").innerHTML = parseFloat(data.contract_info.min_age_of_contract_in_days).toFixed(2);
         document.getElementById("transactions").innerHTML = data.contract_info.number_of_transactions;
         document.getElementById("users").innerHTML = data.contract_info.number_of_unique_users;
         document.getElementById("reported").innerHTML = data.num_times_reported;
