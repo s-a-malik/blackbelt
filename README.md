@@ -24,6 +24,7 @@ Stack:
    - https://mumbai.polygonscan.com/tx/0x990e5be972a7c79a700b97f72ba77df1ff934669c5bab1097243a01fd73194cc
    - https://mumbai.polygonscan.com/tx/0x7d4931f717df02d7f64b6610552ffc56a87098921c3e5e99ac340c989e637cd5
    - https://mumbai.polygonscan.com/tx/0xfbf941c560125e34edd2c072dcc1ada50f961d595fc48eab371246fddf6fc8fb
+
 ### back-end
 
 Flask server for retrieving blockchain data and computing security score.
@@ -50,3 +51,8 @@ Add the Blackbelt snap to metamask.
 
 Usage:
 - Follow instructions from the metamask snap template (documentation)[https://docs.metamask.io/guide/snaps.html?utm_source=ethbogota&utm_medium=event&utm_campaign=2022_Sep_ethbogota-hackathon-page_awareness_event].
+
+
+### revert
+
+Smart contracts for reverting transactions if intent not met.
