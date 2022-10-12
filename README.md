@@ -13,6 +13,8 @@ Furthermore, we experimented with a revert feature that transforms the transacti
 
 ## Repo Structure and Stack
 
+
+
 Stack:
 
 - Metamask snap
@@ -24,6 +26,8 @@ Stack:
    - https://mumbai.polygonscan.com/tx/0x990e5be972a7c79a700b97f72ba77df1ff934669c5bab1097243a01fd73194cc
    - https://mumbai.polygonscan.com/tx/0x7d4931f717df02d7f64b6610552ffc56a87098921c3e5e99ac340c989e637cd5
    - https://mumbai.polygonscan.com/tx/0xfbf941c560125e34edd2c072dcc1ada50f961d595fc48eab371246fddf6fc8fb
+
+There are 3 scripts to run concurrently for the demo: back-end, front-end, and snap. Each is in its own folder. NOTE: Check that the ports for each server is different and the BACKEND_URL in the front-end demo is calling the correct endpoint based on the url the back-end generates.
 
 ### back-end
 
