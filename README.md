@@ -11,6 +11,8 @@ We provide security assessments for smart contract interactions directly in meta
 
 Furthermore, we experimented with a revert feature that transforms the transaction focused execution to an intend focused value transfer. The feature uses a smart contract to check if the balance changes are in line with what is expected and reverts the transaction if the criteria is not fulfilled. 
 
+This was a prize-winning [submission](https://ethglobal.com/showcase/blackbelt-vp2d4) at ETHBogota (Pokt Network, MetaMask, IPFS, Polygon and Coinbase Cloud Prizes) and also at the MetaMask Snaps Sozu Haus in October 2022.
+
 ## Repo Structure and Stack
 
 
@@ -60,3 +62,4 @@ Usage:
 ### revert
 
 Smart contracts for reverting transactions if intent not met.
+
