@@ -13,6 +13,8 @@ Furthermore, we experimented with a revert feature that transforms the transacti
 
 This was a prize-winning [submission](https://ethglobal.com/showcase/blackbelt-vp2d4) at ETHBogota (Pokt Network, MetaMask, IPFS, Polygon and Coinbase Cloud Prizes) and also at the MetaMask Snaps Sozu Haus in October 2022.
 
+News: [Metamask Blog Post, Nov 2022](https://metamask.io/news/developers/blackbelt-snap-real-time-self-defense-against-scams/)
+
 ## Repo Structure and Stack
 
 
@@ -56,7 +58,7 @@ Usage:
 Add the Blackbelt snap to metamask.
 
 Usage:
-- Follow instructions from the metamask snap template (documentation)[https://docs.metamask.io/guide/snaps.html?utm_source=ethbogota&utm_medium=event&utm_campaign=2022_Sep_ethbogota-hackathon-page_awareness_event].
+- Follow instructions from the metamask snap template [documentation](https://docs.metamask.io/guide/snaps.html?utm_source=ethbogota&utm_medium=event&utm_campaign=2022_Sep_ethbogota-hackathon-page_awareness_event).
 
 
 ### revert
